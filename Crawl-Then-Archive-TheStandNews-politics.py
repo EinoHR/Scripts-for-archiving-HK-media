@@ -19,7 +19,7 @@ def archivePage(pagenum):
             archivenow.push(oglink,"ia")
 
 def main():
-    pool = mp.Pool(3) #Maximum is 4.
+    pool = mp.Pool(2) #Maximum is 4.
     pool.map(archivePage, range(1, 1105))
 
 if __name__ == "__main__":
