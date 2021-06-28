@@ -2,8 +2,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 from archivenow import archivenow
 import multiprocessing as mp
-import time
-import random
+import time 
 
 def archivePage(pagenum):
     request = urllib.request.Request(f"https://hongkongfp.com/category/topics/politics-protest/page/{pagenum}/")
@@ -16,11 +15,11 @@ def archivePage(pagenum):
         time.sleep(1.5)
         for link in article.find_all('a'):
             oglink = str(link.get('href'))
-            time.sleep(randrange(0.5))
+            time.sleep(0.5)
             archivenow.push(oglink,"ia")
 
 def main():
-    pool = mp.Pool(4)
+    pool = mp.Pool(3)
     pool.map(archivePage, range(1, 1188))
 
 if __name__ == "__main__":
