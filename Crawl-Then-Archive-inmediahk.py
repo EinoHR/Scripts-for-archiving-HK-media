@@ -13,11 +13,14 @@ def archivePage(pagenum):
     soup = BeautifulSoup(html_page, features="html.parser")
     for link in soup.find_all('a'):
         oglink = str(link.get('href'))
-        time.sleep(1)
-        archivenow.push(oglink,"ia")
+        time.sleep(3)
+        if oglink.startswith("https://"):
+            archivenow.push(oglink,"ia")
+        else:
+            archivenow.push("https://www.inmediahk.net"+oglink, "ia")
 
 def main():
-    pool = mp.Pool(2) #Maximum is 4.
+    pool = mp.Pool(1) #Maximum is 4.
     pool.map(archivePage, range(2796))
 
 if __name__ == "__main__":
